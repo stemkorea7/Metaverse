@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Size Comparison</title>
+  <style>
+    #container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+       background-image: url('img/jumper_edit.png');
+      background-repeat: no-repeat;
+     /* Align background image to the left */
+    /* background-position: left 99px top -300%; */
+    background-position: center;
+
+      
+      min-height: 500px; 
+    position: relative; /* set the position property to relative */
+    }
+
+
+    #container-with {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      /* width: 80%;
+      margin: 20px auto; */
+      
+    }
+  
+    .line-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* margin: 0 5px; */
+      /* margin-top: 130px;
+      margin-right: 146px; */
+     transform: translateX(150px) translateY(61px); /* Move the element 50px to the right */
+      position: relative;
+
+    }
+  
+    #compare-button {
+      margin-top: 10px;
+    }
+  
+    .line-container-with {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      /* margin-top: 22px; */
+    /* margin-left: -41px; */
+    
+    position: relative;
+    }
+  
+    .line {
+      width: 1px;
+      height: 200px;
+      margin-bottom: 20px;
+      /* border: 1px dotted; */
+      transition: height 0.5s ease-out, top 0.5s ease-out;
+      position: absolute;
+
+    }
+  
+    .line-with {
+      width: 200px;
+      height: 1px;
+      /* border: 1px dotted; */
+      transition: width 0.5s ease-out, top 0.5s ease-out;
+      position: absolute;
+  /* top: 50%; adjust as needed */
+  transform: translateX(-13px) translateY(6px);
+    }
+  
+    .line-value {
+      margin-top: 10px;
+    }
+  
+    .line-1 {
+      background-color: red;
+    }
+  
+    .line-2 {
+      background-color: blue;
+    }
+  
+    .line-3 {
+      background-color: red;
+    }
+  
+    .line-4 {
+      background-color: blue;
+    }
+  
+    .line-value {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+    
+  <div>
+    <label for="input-1">옷기장31:</label>
+    <input type="number" id="input-1">
+  </div>
+  <div>
+    <label for="input-2">내기장:</label>
+    <input type="number" id="input-2">
+  </div>
+  <div>
+    <label for="input-3">옷어깨21:</label>
+    <input type="number" id="input-3">
+  </div>
+  <div>
+    <label for="input-4">내어깨:</label>
+    <input type="number" id="input-4">
+  </div>
+ 
+  <div>
+    <button id="compare-button">Compare</button>
+  </div>
+       
+
+  <div id="container">
+    
+    <div id="container-with">
+        <div class="line-container-with">
+          <div class="line-with line-3"></div>
+          <div class="line-value line-3-value"></div>
+        </div>
+        <div class="line-container-with">
+          <div class="line-with line-4"></div>
+          <div class="line-value line-4-value"></div>
+        </div>
+    </div>
+
+    <div class="line-container">
+      <div class="line line-1"></div>
+      <div class="line-value line-1-value"></div>
+    </div>
+    <div class="line-container">
+      <div class="line line-2"></div>
+      <div class="line-value line-2-value"></div>
+    </div>
+  </div>
+ 
+
+       
+
+    <script>
+        const line1 = document.querySelector('.line-1');
+        const line2 = document.querySelector('.line-2');
+        const line3 = document.querySelector('.line-3');
+        const line4 = document.querySelector('.line-4');
+        const line1Value = document.querySelector('.line-1-value');
+        const line2Value = document.querySelector('.line-2-value');
+        const line3Value = document.querySelector('.line-3-value');
+        const line4Value = document.querySelector('.line-4-value');
+        const input1 = document.querySelector('#input-1');
+        const input2 = document.querySelector('#input-2');
+        const input3 = document.querySelector('#input-3');
+        const input4 = document.querySelector('#input-4');
+        const compareButton = document.querySelector('#compare-button');
+
+        compareButton.addEventListener('click', () => {
+            const value1 = parseFloat(input1.value);
+            const value2 = parseFloat(input2.value);
+            const value3 = parseFloat(input3.value);
+            const value4 = parseFloat(input4.value);
+            const max = Math.max(value1, value2);
+            const min = Math.min(value1, value2);
+            let line1Length = max * 10;
+            let line2Length = min * 10;
+
+            if (value1 < value2) {
+            [line1Length, line2Length] = [line2Length, line1Length]; // Swap the line lengths
+            }
+
+            const max1 = Math.max(value3, value4);
+            const min1 = Math.min(value3, value4);
+            let line3Length = max1 * 10;
+            let line4Length = min1 * 10;
+
+            if (value3 < value4) {
+            [line3Length, line4Length] = [line4Length, line3Length]; // Swap the line lengths
+            }
+
+            line1.style.height = `${line1Length}px`;
+            line2.style.height = `${line2Length}px`;
+            line3.style.width = `${line3Length}px`;
+            line4.style.width = `${line4Length}px`;
+            line1Value.textContent = value1;
+            line2Value.textContent = value2;
+            line3Value.textContent = value3;
+            line4Value.textContent = value4;
+            
+        });
+    </script>
+</body>
+</html>
