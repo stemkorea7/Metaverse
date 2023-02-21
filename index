@@ -9,7 +9,7 @@
       flex-direction: row;
       justify-content: center;
       align-items: flex-start;
-       background-image: url('img/jumper_edit.png');
+       background-image: url('https://github.com/stemkorea7/Metaverse/blob/main/img/jumper_edit.png');
       background-repeat: no-repeat;
      /* Align background image to the left */
     /* background-position: left 99px top -300%; */
